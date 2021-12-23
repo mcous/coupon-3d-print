@@ -1,0 +1,41 @@
+{
+  "name": "@mcous/coupon-3d-print",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "prebuild": "rimraf dist dist-ssr",
+    "build": "tsc && npm run build:static && npm run build:ssr && npm run build:prerender",
+    "build:static": "vite build",
+    "build:ssr": "vite build --outDir dist-ssr --ssr src/ssr.tsx",
+    "build:prerender": "node scripts/prerender.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource/hurricane": "^4.5.1",
+    "preact": "^10.5.15",
+    "tachyons": "^4.12.0"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.1.5",
+    "hast-util-is-css-link": "^2.0.0",
+    "preact-render-to-string": "^5.1.19",
+    "prettier": "^2.5.1",
+    "rehype": "^12.0.0",
+    "rehype-format": "^4.0.1",
+    "rehype-inline": "^2.0.0",
+    "rehype-parse": "^8.0.3",
+    "rehype-remove-unused-css": "^0.1.4",
+    "rehype-rewrite": "^3.0.4",
+    "rehype-urls": "^1.1.1",
+    "rimraf": "^3.0.2",
+    "to-vfile": "^7.2.2",
+    "typescript": "^4.4.4",
+    "unified": "^10.1.1",
+    "vite": "^2.7.2"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  }
+}

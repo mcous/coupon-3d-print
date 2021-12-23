@@ -1,0 +1,19 @@
+@import '@fontsource/hurricane';
+@import 'tachyons';
+
+html,
+body,
+#app {
+  height: 100%;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.hurricane {
+  font-family: 'Hurricane', cursive;
+}
+
+.animate {
+  transition: color 0.15s ease-in-out;
+}
