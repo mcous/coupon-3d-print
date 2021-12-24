@@ -1,14 +1,12 @@
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { unified } from 'unified'
-import { read, write } from 'to-vfile'
+import { read, readSync, write } from 'to-vfile'
 import { rehype } from 'rehype'
 import { isCssLink } from 'hast-util-is-css-link'
 import rehypeParse from 'rehype-parse'
 import rehypeRewrite from 'rehype-rewrite'
 import rehypeFormat from 'rehype-format'
-import rehypeUrls from 'rehype-urls'
-import rehypeInline from 'rehype-inline'
 import removeUnusedCss from 'rehype-remove-unused-css'
 
 import ssr from '../dist-ssr/ssr.js'
@@ -20,23 +18,19 @@ const htmlParser = unified().use(rehypeParse, { fragment: true })
 
 const processor = rehype()
   .use(rehypeRewrite, {
-    selector: 'body',
     rewrite: (node) => {
-      const appFragment = htmlParser.parse(ssr.render())
-      node.children = [...appFragment.children, ...node.children]
+      if (node.tagName == 'body') {
+        const appFragment = htmlParser.parse(ssr.render())
+        node.children = [...appFragment.children, ...node.children]
+      } else if (isCssLink(node)) {
+        const href = node.properties.href
+        const filePath = href.replace('/coupon-3d-print', DIST_DIR)
+        const contents = readSync(filePath)
+        node.tagName = 'style'
+        node.properties = {}
+        node.children = [{ type: 'text', value: String(contents) }]
+      }
     },
-  })
-  .use(rehypeUrls, (url, node) => {
-    if (isCssLink(node) && url.path) {
-      return url.path.replace('/coupon-3d-print', DIST_DIR)
-    }
-  })
-  .use(rehypeInline, {
-    css: true,
-    js: false,
-    images: false,
-    imports: false,
-    svgElements: false,
   })
   .use(removeUnusedCss)
   .use(rehypeFormat)

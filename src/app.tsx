@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'preact/hooks'
 
-const WRAPPER_STYLE = 'min-vh-100 pv5 ph4 tc'
+const WRAPPER_STYLE = 'pv5 ph4 tc'
 const HEADLINE_STYLE = 'hurricane f1 f-subheadline-m f-headline-l lh-solid'
 const TITLE_STYLE = 'f4 f3-ns lh-title measure-narrow center'
 const CAVEAT_ANCHOR_STYLE = 'link yellow hover-gold'
