@@ -20,15 +20,15 @@ const htmlParser = unified().use(rehypeParse, { fragment: true })
 
 const processor = rehype()
   .use(rehypeRewrite, {
-    selector: '#app',
+    selector: 'body',
     rewrite: (node) => {
       const appFragment = htmlParser.parse(ssr.render())
-      node.children = appFragment.children
+      node.children = [...appFragment.children, ...node.children]
     },
   })
   .use(rehypeUrls, (url, node) => {
     if (isCssLink(node) && url.path) {
-      return join(DIST_DIR, url.path)
+      return url.path.replace('/coupon-3d-print', DIST_DIR)
     }
   })
   .use(rehypeInline, {

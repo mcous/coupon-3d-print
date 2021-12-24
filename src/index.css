@@ -1,9 +1,13 @@
 @import '@fontsource/hurricane';
 @import 'tachyons';
+@import 'animate.css';
+
+:root {
+  --animate-duration: 500ms;
+}
 
 html,
-body,
-#app {
+body {
   height: 100%;
   width: 100%;
   -webkit-font-smoothing: antialiased;
@@ -15,5 +19,5 @@ body,
 }
 
 .animate {
-  transition: color 0.15s ease-in-out;
+  transition: color 500ms ease-in-out;
 }

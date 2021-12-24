@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@fontsource/hurricane": "^4.5.1",
+    "animate.css": "^4.1.1",
     "preact": "^10.5.15",
     "tachyons": "^4.12.0"
   },
